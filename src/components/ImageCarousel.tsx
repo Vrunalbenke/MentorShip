@@ -24,7 +24,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ image }) => {
   }, [xTranslation, width]);
   return (
     <motion.div
-      className=" left-0 flex gap-4"
+      className=" left-0 flex gap-10"
       ref={ref}
       style={{ x: xTranslation }}
     >

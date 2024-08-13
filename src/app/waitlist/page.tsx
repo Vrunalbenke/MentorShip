@@ -9,7 +9,6 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { useJoinWaitlist } from "./hooks";
 
-// Define your Zod schema
 const waitlistSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
   last_name: z.string().min(1, "Last name is required"),
@@ -24,6 +23,12 @@ function Waitlist() {
     handleSubmit,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      first_name: undefined,
+      last_name: undefined,
+      email: undefined,
+      role: "student",
+    },
     resolver: zodResolver(waitlistSchema),
   });
 
@@ -59,15 +64,17 @@ function Waitlist() {
               <div className="grid grid-cols-2 gap-x-5">
                 <div className="w-[350px] py-2">
                   <div className="w-[350px] bg-[#101010] px-3 py-2 rounded-xl">
-                    <p className="text-[#A1A1A1] text-[13px] p-0">First name</p>
+                    <p className="text-[#A1A1A1] text-[13px] py-0 px-2">
+                      First name
+                    </p>
                     <input
                       {...register("first_name")}
-                      placeholder="First name"
-                      className="bg-[#101010] text-white p-2 rounded border-0 w-[260px]"
+                      placeholder="John"
+                      className="bg-[#101010] text-white p-2 rounded  focus:ring-0  border-0 w-[260px]"
                     />
                     {errors.first_name &&
                       typeof errors.first_name.message === "string" && (
-                        <p className="text-red-500">
+                        <p className="text-red-500 px-2">
                           {errors.first_name.message}
                         </p>
                       )}
@@ -75,15 +82,17 @@ function Waitlist() {
                 </div>
                 <div className="w-[350px] py-2">
                   <div className="w-[350px] bg-[#101010] px-3 py-2 rounded-xl">
-                    <p className="text-[#A1A1A1] text-[13px] p-0">Last name</p>
+                    <p className="text-[#A1A1A1] text-[13px] py-0 px-2">
+                      Last name
+                    </p>
                     <input
                       {...register("last_name")}
-                      placeholder="Last name"
-                      className="bg-[#101010] text-white p-2 rounded border-0 w-[260px]"
+                      placeholder="Doe"
+                      className="bg-[#101010] text-white p-2 rounded  focus:ring-0  border-0 w-[260px]"
                     />
                     {errors.last_name &&
                       typeof errors.last_name.message === "string" && (
-                        <p className="text-red-500">
+                        <p className="text-red-500 px-2">
                           {errors?.last_name?.message}
                         </p>
                       )}
@@ -92,28 +101,28 @@ function Waitlist() {
               </div>
               <div className="grid grid-cols-2 gap-x-5">
                 <div className="w-[350px] bg-[#101010] px-3 py-2 rounded-xl">
-                  <p className="text-[#A1A1A1] text-[13px] p-0">Role</p>
+                  <p className="text-[#A1A1A1] text-[13px] py-0 px-2">Role</p>
                   <select
                     {...register("role")}
-                    className="bg-[#101010] text-white p-2 rounded border-0 w-[330px]"
+                    className="bg-[#101010] text-white p-2 rounded  focus:ring-0  border-0 w-[330px]"
                   >
                     <option value="student">Student</option>
                     <option value="mentor">Mentor</option>
                   </select>
                   {errors.role && typeof errors.role.message === "string" && (
-                    <p className="text-red-500">{errors.role.message}</p>
+                    <p className="text-red-500 px-2">{errors.role.message}</p>
                   )}
                 </div>
                 <div className="w-[350px] bg-[#101010] px-3 py-2 rounded-xl">
-                  <p className="text-[#A1A1A1] text-[13px] p-0">Email</p>
+                  <p className="text-[#A1A1A1] text-[13px] py-0 px-2">Email</p>
                   <input
                     {...register("email")}
                     type="email"
-                    placeholder="Email"
-                    className="bg-[#101010] text-white p-2 rounded border-0 w-[260px]"
+                    placeholder="example@gmail.com"
+                    className="bg-[#101010] text-white p-2 rounded  focus:ring-0  border-0 w-[260px]"
                   />
                   {errors.email && typeof errors.email.message === "string" && (
-                    <p className="text-red-500">{errors.email.message}</p>
+                    <p className="text-red-500 px-2">{errors.email.message}</p>
                   )}
                 </div>
               </div>
